@@ -1,0 +1,6 @@
+panel_version,market,language,question_id,family,question,brand_question,notes
+v1-{date},{market},{lang},Q01,discovery,{question without the brand name},no,
+v1-{date},{market},{lang},Q02,comparison,{question naming competitors only},no,
+v1-{date},{market},{lang},Q03,problem,{question about the pain},no,
+v1-{date},{market},{lang},Q04,decision,{question at the point of choice},no,
+v1-{date},{market},{lang},B01,brand,{what is the brand},yes,scored apart (accuracy)

@@ -1,0 +1,2 @@
+package,price,currency,unit,includes,excludes,duration_weeks,client_provides,notes
+{package name},{your price},{EUR},one-off|per-month|per-day,{what is delivered with items joined by +},{what is not included},{weeks},{access and input needed from the client},{conditions + payment terms + validity}

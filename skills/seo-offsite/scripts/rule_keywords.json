@@ -1,0 +1,29 @@
+{
+  "_about": "Keyword lists used by read_rules.py to pick candidate rule sentences. A trailing * matches a word prefix. Matching finds candidates only; a human reads the full rule. Review and extend per language; do not add words from memory without checking real rules pages.",
+  "rules": {
+    "en": {
+      "self_promotion": ["self-promotion", "self promotion", "self-promo", "promote your own", "promotional", "advertis*", "spam*", "shill*"],
+      "ai_generated": ["ai", "a.i.", "artificial intelligence", "ai-generated", "ai-written", "generated", "chatgpt", "gpt", "llm*", "language model*", "machine-generated", "automated"],
+      "link_back": ["backlink*", "back link", "link back", "linkback", "reciprocal", "dofollow", "do-follow", "nofollow", "no-follow", "badge*", "link to us", "link to our"],
+      "fee_paid_sponsored": ["fee*", "paid", "pay", "payment", "price*", "pricing", "sponsor*", "free of charge", "for free", "$", "€", "£"],
+      "criteria": ["criteria", "criterion", "requirement*", "require*", "must", "eligib*", "minimum", "at least", "accept*", "reject*", "guideline*", "rule*", "not allowed", "prohibited", "forbidden", "banned"],
+      "disclosure": ["disclos*", "affiliat*", "conflict of interest", "transparen*", "your own project", "you made", "you built"]
+    },
+    "fr": {
+      "self_promotion": ["autopromotion", "auto-promotion", "promotion", "promotionnel*", "publicit*", "spam*", "racolage"],
+      "ai_generated": ["ia", "i.a.", "intelligence artificielle", "généré*", "rédigé par une ia", "chatgpt", "gpt", "llm*", "modèle de langage", "automatis*"],
+      "link_back": ["backlink*", "lien retour", "liens retour", "lien réciproque", "liens réciproques", "réciproque*", "dofollow", "nofollow", "badge*", "lien vers notre site"],
+      "fee_paid_sponsored": ["payant*", "frais", "tarif*", "prix", "paiement", "sponsoris*", "gratuit*", "€", "$"],
+      "criteria": ["critère*", "exigence*", "doit", "doivent", "obligatoire*", "condition*", "règle*", "minimum", "au moins", "accept*", "refus*", "interdit*", "autorisé*"],
+      "disclosure": ["divulg*", "affili*", "conflit d'intérêts", "conflit d'intérêt", "transparen*", "votre propre projet", "préciser que"]
+    }
+  },
+  "red_flags": {
+    "_about": "Phrases pointing at a red flag of references/red-flags.md. A hit is a candidate to verify by reading the sentence, not a verdict.",
+    "paid_link_placement": ["sponsored post*", "dofollow link*", "do-follow link*", "paid link*", "buy a link", "buy links", "link insertion*", "guest post package*", "article sponsorisé*", "lien sponsorisé*", "liens sponsorisés", "lien dofollow", "liens dofollow"],
+    "reciprocal_link_required": ["reciprocal link*", "backlink to us", "link back to us", "link back is required", "backlink is required", "add our badge", "display our badge", "lien réciproque*", "lien retour obligatoire", "lien retour est obligatoire", "ajouter notre badge"],
+    "rules_exclude_site": ["no self-promotion", "self-promotion is not allowed", "no commercial", "commercial products are not", "paid products are not", "no ai-generated", "ai-generated content is not allowed", "ai-generated submissions", "pas d'autopromotion", "autopromotion interdite", "contenu généré par ia interdit", "pas de contenu généré"],
+    "asks_for_credentials": ["password", "admin access", "admin rights", "administrator access", "api key", "login credentials", "mot de passe", "accès administrateur", "accès admin", "clé api", "identifiants"],
+    "guaranteed_metrics": ["guaranteed ranking*", "guaranteed da", "guaranteed dr", "guaranteed traffic", "increase your da", "increase your dr", "classement garanti", "trafic garanti", "da garanti", "dr garanti"]
+  }
+}

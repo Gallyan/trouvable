@@ -1,0 +1,14 @@
+{
+  "name": "trouvable",
+  "description": "SEO and GEO skills for Claude Code",
+  "owner": {
+    "name": "Guillaume Orsal"
+  },
+  "plugins": [
+    {
+      "name": "trouvable",
+      "source": "./",
+      "description": "SEO and GEO skills with stdlib-only Python scripts"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "trouvable",
+  "displayName": "Trouvable — SEO & GEO skills",
+  "version": "1.0.0",
+  "description": "SEO and GEO skills: plan, audit, indexing, internal links, Search Console, structured data, hreflang, keywords, briefs, comparison pages, fact-checking, off-site, local search, AI access, content and mentions, llms.txt, client reports and proposals",
+  "author": {
+    "name": "Guillaume Orsal"
+  },
+  "repository": "https://github.com/Gallyan/trouvable",
+  "license": "MIT",
+  "keywords": ["seo", "geo", "ai-search", "llms-txt", "search-console", "audit", "schema", "hreflang", "content", "local-seo"]
+}

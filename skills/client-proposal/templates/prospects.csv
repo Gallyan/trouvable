@@ -1,0 +1,2 @@
+id,domain,company,contact_role,stage,source,first_contact,last_contact,next_action,next_action_date,value,value_unit,audit_file,audit_date,proposal_file,lost_reason,notes
+P001,{domain},{company},{role such as owner or marketing lead},lead|qualified|proposal-sent|won|lost,{referral|inbound|event|network|other},{YYYY-MM-DD},{YYYY-MM-DD},{one concrete action},{YYYY-MM-DD},{amount from your offer},one-off|per-month|per-day,{path to issues.csv or report},{YYYY-MM-DD},{path to proposal},{why lost; empty unless lost},{free text; no personal data beyond business contact}

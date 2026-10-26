@@ -1,0 +1,2 @@
+id,claim_text,location,type,risk,source_url,source_language,string_searched,string_found,verdict,checked_on,note
+C001,"{sentence as written}","{h1|p3|table row 2}","{price,absolute}","{high|medium|low}","{url}","{fr}","{exact string}","{quoted string from source or empty}","{confirmed|wrong|unsupported|unreadable|outdated|unchecked|author}","{YYYY-MM-DD}","{reason, scope, variant tried}"
