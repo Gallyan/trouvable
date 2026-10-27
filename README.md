@@ -1,13 +1,13 @@
 # Trouvable
 
 Vingt skills Claude pour le SEO et le GEO (la visibilité dans les réponses des assistants IA),
-livrés comme un plugin Claude Code. Chacun répond à une question concrète (par où commencer,
-pourquoi mes pages ne sont pas indexées, les IA peuvent-elles citer mes pages…) avec une méthode
-écrite, des scripts Python quand une étape en a besoin et des gabarits de livrables.
+livrés comme un plugin Claude Code. Chacun traite une question (par où commencer, pourquoi mes
+pages ne sont pas indexées, les IA peuvent-elles citer mes pages…) avec une méthode écrite, des
+scripts Python quand une étape en a besoin et des gabarits de livrables.
 
-Les instructions des skills sont rédigées en anglais. Ils se déclenchent sur des demandes en français
-ou en anglais, répondent dans la langue de l'utilisateur, et leurs gabarits de livrables sont en
-français (vouvoiement, typographie française, montants HT).
+Claude lit les instructions des skills en anglais. Les skills se déclenchent sur des demandes en
+français ou en anglais et répondent dans votre langue ; leurs gabarits de livrables sont en français
+(vouvoiement, typographie française, montants HT).
 
 ### SEO
 
@@ -107,7 +107,7 @@ Quelques demandes pour commencer, en langage naturel :
 - « Mon site est-il prêt pour ChatGPT et AI Overviews ? » → `geo-audit`
 - « Fais un rapport client à partir de cet audit » → `client-report`
 
-Les livrables (rapports, plans, propositions) sont écrits dans le dossier de travail de la
+Claude écrit les livrables (rapports, plans, propositions) dans le dossier de travail de la
 session : lancez Claude Code dans un dossier par client ou par site.
 
 ### Claude.ai
@@ -136,8 +136,8 @@ Ne pas cumuler avec le plugin : les mêmes skills apparaîtraient deux fois.
   401, 403 et 429. Les adresses privées et locales (réseau local, `localhost`, métadonnées cloud)
   sont toujours refusées, y compris après une redirection ou via un lien trouvé sur une page ;
   pour auditer un site local ou de préproduction, passer `--allow-private` explicitement.
-- Seule exception : `seo-indexing/scripts/indexnow_ping.py` envoie des URL à IndexNow,
-  en simulation par défaut, et seulement avec un flag explicite et votre clé.
+- Seule exception : `seo-indexing/scripts/indexnow_ping.py` envoie des URL à IndexNow. Par défaut
+  il simule l'envoi et affiche un code ; il n'envoie qu'avec `--send`, ce code et votre clé.
 - Pas de rendu JavaScript : les rapports concernés le signalent.
 
 ## Développement
@@ -145,12 +145,13 @@ Ne pas cumuler avec le plugin : les mêmes skills apparaîtraient deux fois.
 ```
 python3 -m unittest discover -s tests -t .   # tests, sans accès réseau
 python3 tools/sync_lib.py                    # recopie lib/seokit dans les skills
-python3 tools/check_skills.py                # appels interdits, options documentées, copies, syntaxe 3.9
+python3 tools/check_skills.py                # appels interdits, options documentées, copies, syntaxe 3.9,
+                                             # ruff et mypy s'ils sont installés
 ```
 
 `lib/seokit` est la source de la bibliothèque partagée (fetch, robots.txt, HTML, sitemap, crawl,
 exports Search Console CSV/XLSX/ZIP, texte) ; son API est décrite dans `lib/seokit/API.md`.
-Les copies `skills/*/scripts/seokit/` sont générées par `tools/sync_lib.py` : ne pas les éditer.
+`tools/sync_lib.py` génère les copies `skills/*/scripts/seokit/` : ne pas les éditer.
 
 Le champ `version` de `.claude-plugin/plugin.json` fige la version installée : l'augmenter à
 chaque publication pour que `claude plugin update` livre les changements.
@@ -171,8 +172,8 @@ tools/               synchronisation, contrôles, packaging
   note les réponses que vous collez.
 - Les faits externes (libellés de Search Console, robots des assistants IA, IndexNow, règles
   hreflang, règles de la fiche Google, textes français sur les avis, la prospection, les mentions
-  légales et l'accessibilité) ont été relus sur les pages officielles en octobre 2026 et peuvent
-  avoir changé : chaque skill demande de les relire avant de les citer.
+  légales et l'accessibilité) viennent des pages officielles lues en octobre 2026. Ils peuvent avoir
+  changé : chaque skill demande à Claude de les relire avant de les citer.
 - Les skills citent les textes de loi sans donner de conseil juridique.
 - Les positions dans Google Maps ne sont pas mesurées : elles dépendent de l'endroit d'où l'on
   cherche.
