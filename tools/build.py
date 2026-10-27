@@ -1,4 +1,4 @@
-"""Package each skill as dist/<slug>.skill (a ZIP whose root is the skill folder).
+"""Package each skill as dist/<slug>.zip (a ZIP whose root is the skill folder).
 
 Usage: python3 tools/build.py [slug ...]
 Runs tools/sync_lib.py first so each package carries the current seokit.
@@ -17,9 +17,9 @@ SKIP_DIRS = {"__pycache__", ".pytest_cache"}
 
 
 def build(slug: str) -> str:
-    """Zip one skill into dist/<slug>.skill, leaving out caches, hidden files and symlinks; returns its path."""
+    """Zip one skill into dist/<slug>.zip, leaving out caches, hidden files and symlinks; returns its path."""
     source = os.path.join(SKILLS, slug)
-    target = os.path.join(DIST, f"{slug}.skill")
+    target = os.path.join(DIST, f"{slug}.zip")
 
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED) as archive:
         for folder, dirs, files in os.walk(source):
@@ -48,7 +48,7 @@ def main(argv) -> int:
 
     if not argv:
         for stale in os.listdir(DIST):
-            if stale.endswith(".skill"):
+            if stale.endswith((".zip", ".skill")):
                 os.remove(os.path.join(DIST, stale))
 
     slugs = argv or sorted(d for d in os.listdir(SKILLS)

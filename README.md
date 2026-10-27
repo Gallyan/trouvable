@@ -67,7 +67,7 @@ Chaque `SKILL.md` reprend les mêmes règles (`skills/_shared/GROUND-RULES.md`) 
 ### Prérequis
 
 - [Claude Code](https://code.claude.com/docs/fr/overview) (terminal, application de
-  bureau ou extension d'éditeur), ou Claude.ai pour la version en fichiers `.skill`.
+  bureau ou extension d'éditeur), ou Claude.ai (voir plus bas).
 - Python 3.9 ou plus récent pour les scripts (bibliothèque standard uniquement, rien à
   installer). Sans Python, chaque skill suit sa procédure manuelle.
 - Git, pour que Claude Code récupère le dépôt.
@@ -110,22 +110,33 @@ Quelques demandes pour commencer, en langage naturel :
 Claude écrit les livrables (rapports, plans, propositions) dans le dossier de travail de la
 session : lancez Claude Code dans un dossier par client ou par site.
 
-### Claude.ai
+### Claude.ai (navigateur ou application, sans Claude Code)
 
-```
-python3 tools/build.py            # produit dist/<slug>.skill
-```
+Claude.ai n'installe pas de plugin : chaque skill s'importe à la main, sous forme d'archive ZIP.
+Les offres Free, Pro, Max, Team et Enterprise y ont accès (sur Enterprise, l'administrateur doit
+activer les skills), avec l'exécution de code activée.
 
-Chaque fichier `.skill` est un ZIP autonome (il embarque sa copie de `seokit`) à importer dans
-les paramètres des skills.
+1. Activez l'exécution de code : Settings > Capabilities, option « Code execution and file
+   creation » (« Create and edit files » dans la nouvelle présentation).
+2. Fabriquez les archives sur votre ordinateur (Git et Python 3.9 ou plus récent) :
 
-### Skills liés au dépôt (développement)
+   ```
+   git clone https://github.com/Gallyan/trouvable.git
+   cd trouvable
+   python3 tools/build.py              # tous les skills dans dist/<slug>.zip
+   python3 tools/build.py seo-local    # ou seulement ceux que vous voulez
+   ```
 
-```
-for d in skills/*/; do [ -f "$d/SKILL.md" ] && ln -s "$PWD/$d" ~/.claude/skills/; done
-```
+   Chaque archive contient le dossier du skill avec sa copie de `seokit` : elle se suffit à
+   elle-même.
+3. Dans Claude.ai : Customize > Skills, bouton « + », « Create skill », « Upload a skill », puis
+   choisissez une archive de `dist/`. Répétez pour chaque skill voulu.
 
-Ne pas cumuler avec le plugin : les mêmes skills apparaîtraient deux fois.
+Pour mettre à jour : `git pull`, relancez `tools/build.py` et importez de nouveau les archives.
+Les scripts qui lisent des sites ont besoin d'un accès réseau depuis l'environnement d'exécution de
+Claude.ai ; s'il est fermé, le skill suit sa procédure manuelle et le signale. Les intitulés de
+menus, en anglais, viennent de l'aide de Claude.ai lue en octobre 2026 ; l'interface en français
+et les versions suivantes peuvent les nommer autrement.
 
 ## Scripts
 
