@@ -3,13 +3,24 @@
 In the main conversation Claude knows the brand, its competitors and the purpose of the test.
 The questions do not contain the brand, but the one answering them does, and that can steer its
 searches and its wording. A sub-agent that receives only the question is closer to an ordinary
-user. Use this route whenever the Agent tool is available; otherwise Claude answers the panel in
-the main conversation and the report states that bias in its limits.
+user.
+
+| Mode | Route for Claude's runs |
+|---|---|
+| `full` | Isolated sub-agents whenever the Agent tool is available: the score depends on it |
+| `quick` | Main conversation by default (a first look, about ten times cheaper); sub-agents only when the user asks |
+
+Without the Agent tool, Claude answers in the main conversation in both modes. Whenever the main
+conversation is used, the report states the bias in its limits.
+
+Cost measured on 2026-11-02 (4 questions, Sonnet sub-agents, `measured`): about 40 k tokens of
+starting context per sub-agent before any search, against about 2 k tokens per question in the
+main conversation. Re-measure when Claude Code changes.
 
 ## Before launching
 
 1. **Count the agents.** One run = one new sub-agent.
-   - `quick`: every question of the panel (non-brand and brand) × 1 run.
+   - `quick` on request: every question of the panel (non-brand and brand) × 1 run.
    - `full`: at most 20 non-brand questions × 3 runs, plus the brand questions × 3 runs. When the
      panel holds more than 20 non-brand questions, pick 20 before any run, keeping the family
      shares of `references/panel-design.md`, and mark them `claude-subset` in the `notes` column
@@ -31,8 +42,12 @@ the main conversation and the report states that bias in its limits.
   brand, a competitor, the market's category or the word "audit".
 - `prompt`: the template below, with only its three placeholders filled. Copy the question
   verbatim from `panel.csv`: no rewording, no added context.
-- Run in waves of 5 to 10 calls sent in one message. Each run of the same question is a new call;
-  never continue a finished sub-agent (no SendMessage), so that runs stay independent.
+- **Warm the cache first.** Launch one sub-agent alone and wait until it finishes. The next ones
+  then read about half of their starting context from the cache instead of writing it again
+  (measured: about 19 k of 39 k tokens; agents started together share nothing).
+- Then run waves of 5 to 10 calls sent in one message, one wave after the other with no long
+  pause, since the cache expires. Each run of the same question is a new call; never continue a
+  finished sub-agent (no SendMessage), so that runs stay independent.
 
 ## Sub-agent prompt
 

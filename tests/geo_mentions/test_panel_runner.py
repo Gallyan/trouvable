@@ -39,6 +39,7 @@ class PanelRunnerTest(unittest.TestCase):
         self.assertIn("Never `fork`", text)
         self.assertIn("`model`: `sonnet`", text)
         self.assertIn("`description`: `Answer a user question`", text)
+        self.assertIn("Warm the cache first", text)
 
     def test_skill_links_the_runner_and_keeps_a_fallback(self):
         text = read("SKILL.md")
