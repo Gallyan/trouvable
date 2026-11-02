@@ -44,6 +44,7 @@ class PanelRunnerTest(unittest.TestCase):
         text = read("SKILL.md")
 
         self.assertIn("references/panel-runner.md", text)
+        self.assertIn("`model: sonnet`", text)
         self.assertIn("Main-conversation route otherwise", text)
         self.assertIn("Answering the panel while knowing the brand", text)
 
