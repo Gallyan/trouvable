@@ -18,7 +18,7 @@ Les poids et les tranches sont un choix de conception heuristique de ce skill, p
 
 | Moteur | Lancé par | Mode | Essais | Dates | Statut |
 |---|---|---|---|---|---|
-| Recherche web de Claude ({outil}) | Claude | | | | testé |
+| Recherche web de Claude ({outil}) | Claude : {sous-agents isolés ({modèle}) / conversation principale} | | | | testé |
 | ChatGPT | utilisateur (collé) | | | | testé / non testé |
 | Perplexity | utilisateur (collé) | | | | testé / non testé |
 | Gemini | utilisateur (collé) | | | | testé / non testé |

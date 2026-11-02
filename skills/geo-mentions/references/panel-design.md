@@ -41,6 +41,7 @@ outdated price). They never count towards presence.
 
 Note for every run: engine, model or mode shown by the interface (`reported`), logged in or not,
 country, date. Answers vary between runs; repetitions are what make the score a sample.
+Claude's own runs follow `panel-runner.md` when sub-agents are available.
 
 ## Paste format for raw answers
 

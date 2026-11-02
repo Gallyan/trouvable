@@ -39,8 +39,10 @@ Ask for everything missing in **one** message.
 1. **Check the name.** Search the bare brand name, date it, and note same-name entities or old products that collide. A collision is a finding: assistants may merge the two.
 2. **Check crawler access.** Run the access check of geo-audit (`ai_access.py`) when that skill is available. Manual route: read `/robots.txt` and list, per token, allowed / disallowed / not mentioned, keeping the assistants' **search agents** apart from **training crawlers**; tokens change, so re-read each vendor's official crawler page today and date it.
 3. **Build the panel.** 15–30 questions per market from `references/panel-design.md`: discovery, comparison, problem and decision families, none containing the brand, plus 3–5 brand questions kept apart. Neutral wording only. Freeze it in `templates/panel.csv` before any run; the user validates it.
-4. **Collect the answers.**
-   - Claude answers the panel through its built-in web search and labels these runs "Claude web search (tool, date)", never as another assistant.
+4. **Collect the answers.** Claude's runs use the engine name `claude-web-search` and are labelled "Claude web search (tool, date)", never as another assistant.
+   - Sub-agent route, when the Agent tool is available: each run goes to a new sub-agent that sees only the question, its language and its country, following `references/panel-runner.md` (agent count, user confirmation, launch settings, assembly). In `full` mode, at most 20 non-brand questions, frozen before any run.
+   - Main-conversation route otherwise: Claude answers the panel itself through its built-in web search. It knows the brand while answering: state that bias in the report limits.
+   - The report names the route used; a re-test keeps the same route and model.
    - The user runs each question in ChatGPT, Perplexity or Gemini, in a fresh chat, and pastes the **raw** answer with its sources, using the paste format in `references/panel-design.md`.
 5. **Parse and score.**
    - Script: `python3 scripts/parse_answers.py --answers <answers.txt> --brand "<name>,<alias>" --competitors "<a>,<b>" --out runs.csv`, then `python3 scripts/visibility_score.py --panel panel.csv --runs runs.csv --out score.json`.
@@ -55,7 +57,7 @@ Ask for everything missing in **one** message.
 The report contains, in this order:
 
 1. The direct answer, then the score out of 100 with band, plausible range and components — or presence counts and "score not computed" with the reason.
-2. Engines tested, mode, number of runs, dates; engines not tested.
+2. Engines tested, mode, number of runs, dates, route used for Claude's runs; engines not tested.
 3. Name check and crawler access table, each token with its source page and reading date.
 4. Per-question table: named or not, position, who is named instead, sources cited.
 5. Cited sites: domain, times cited, brand present there (yes / no / not read).
@@ -85,6 +87,7 @@ The report contains, in this order:
 |---|---|
 | "Best X tool like <Brand>?" in the panel | Brand-free wording; brand questions scored apart |
 | Calling Claude's web search "ChatGPT" | Label each run with the engine that produced it |
+| Answering the panel while knowing the brand | Isolated sub-agents from `references/panel-runner.md`; otherwise state the bias in the limits |
 | A score from one run per question | Below the minimum sample, counts only; full mode for a score |
 | Treating GPTBot rules as search access | Read search-agent tokens separately, from today's vendor page |
 | Pasting a summary of the answer | Raw answer with its source links |
