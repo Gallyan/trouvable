@@ -43,6 +43,7 @@ Ask for everything missing in **one** message.
    - Sub-agent route, in `full` mode when the Agent tool is available: each run goes to a new sub-agent that sees only the question, its language and its country, launched with `model: sonnet` (never `fork`), one agent alone first to warm the cache, then waves, following `references/panel-runner.md` (agent count, user confirmation, launch settings, assembly). At most 20 non-brand questions, frozen before any run.
    - Main-conversation route otherwise, and by default in `quick` mode (about ten times cheaper): Claude answers the panel itself through its built-in web search. It knows the brand while answering: state that bias in the report limits.
    - The report names the route used; a re-test keeps the same route and model.
+   - Claude's web search takes no country setting and its tool description reads "US-only": the place the searches run from is not controlled. Say so in the report limits; answers as seen from the market come from the engines the user runs there.
    - The user runs each question in ChatGPT, Perplexity or Gemini, in a fresh chat, and pastes the **raw** answer with its sources, using the paste format in `references/panel-design.md`.
 5. **Parse and score.**
    - Script: `python3 scripts/parse_answers.py --answers <answers.txt> --brand "<name>,<alias>" --competitors "<a>,<b>" --out runs.csv`, then `python3 scripts/visibility_score.py --panel panel.csv --runs runs.csv --out score.json`.

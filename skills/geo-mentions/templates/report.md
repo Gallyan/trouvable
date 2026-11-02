@@ -64,3 +64,4 @@ Effet attendu du plan : une fourchette qui inclut zéro.
 ## Non mesuré
 
 - {moteurs non testés, pages non lues, règles de pare-feu non visibles, …}
+- Lieu d'où part la recherche web de Claude : non maîtrisé (aucun réglage de pays, outil décrit « US-only »).
